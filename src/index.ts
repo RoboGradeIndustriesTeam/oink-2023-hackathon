@@ -8,13 +8,20 @@ import mainController from "./controllers/main";
 import chatController from "./controllers/chat";
 import { PrismaClient } from "@prisma/client";
 import { ws } from "./controllers/ws";
-import { createServer } from "http";
+import { createServer } from "https";
 import { Server } from "socket.io"
 import { authMiddleware, sIOauthMiddleware } from "./middlewares/authMiddleware";
 import cors from "cors";
+import fs from "fs";
+
+var privateKey = fs.readFileSync( "/etc/letsencrypt/live/oink.ban.su/privkey.pem" );
+var certificate = fs.readFileSync( "/etc/letsencrypt/live/oink.ban.su/fullchain.pem" );
 
 const app = express();
-const server = createServer(app);
+const server = createServer({
+    key: privateKey,
+    cert: certificate
+}, app);
 const io = new Server(server, {
     maxHttpBufferSize: 1e8 / 5,
     cors: {
@@ -75,8 +82,9 @@ io.engine.use(sIOauthMiddleware(db))
 async function main() {
     await db.$connect();
     ws(io, db);
-    server.listen(3000, () => {
-        console.log('listening on :3000')
+    server.listen(443, () => {
+        console.log('listening on :443')
     })
 }
 main();
+

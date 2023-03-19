@@ -102,6 +102,7 @@ const renderMsg = (msg) => {
         newMessageMount.innerHTML += `<div class="msg">
         <div class="card chat-msg">
             <div class="card-body">
+                ${m}
                 <h6>${msg.user.fio}: </h6>
                 <h5 class="card-title">${msg.text}</h5>
                 <p class="mb-0 chat-msg-time">${moment(msg.createdAt).format(

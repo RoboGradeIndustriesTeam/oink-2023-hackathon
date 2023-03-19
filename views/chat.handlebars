@@ -77,9 +77,9 @@
                     />{{user.fio}}
                   </button>
                   <div class="dropdown-menu w-100 text-center">
-                    <a class="dropdown-item active">Профиль</a><a
+                    <a class="dropdown-item" href="/profile">Профиль</a><a
                       class="dropdown-item dropdown-item-logout"
-                      href="#"
+                      href="/logout"
                     >Выход</a>
                   </div>
                 </div>
@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <div class="col">
+    <div class="col-md-8 col-lg-8 col-xl-8 col-xxl-8">
       <div
         class="text-start d-flex justify-content-center align-items-center chat-header"
       >
@@ -181,9 +181,6 @@
     </div>
   </div>
 </div>
-
-<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="/assets/js/chat.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
   window.baseMessages = "{{chatsJSON}}"; window.baseChats = "{{chatsSJSON}}";
