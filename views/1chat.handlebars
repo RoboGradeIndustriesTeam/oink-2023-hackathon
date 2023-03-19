@@ -1,0 +1,23 @@
+<ul id="chatMount">
+
+</ul>
+<br>
+<h1>{{chat.title}} {{chat.name}}</h1>
+
+<ul id="newMesasgeMount">
+
+</ul>
+
+<div>
+    <input type="file" id="newMessageM" placeholder="медиа контент">
+    <input type="text" placeholder="ваше сообщение будет отправлено от имени {{user.fio}}" id="newMessageT" class="form-control">
+    <button id="newMessageB" class="btn btn-primary">Отправить</button>
+</div>
+        <script src="/socket.io/socket.io.js"></script>
+<script>
+    window.globalUserId = {{user.id}}
+    window.baseMessages = "{{chatsJSON}}"
+    window.baseChats = "{{chatsSJSON}}"
+</script>
+<script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script src="/static/js/chat.js"></script>

@@ -1,0 +1,213 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 comp">
+      <div style="height: 100vh;overflow-y: scroll;">
+        <div class="text-center chat-list-search">
+          <div class="dropdown mb-2"><button
+              class="btn btn-outline-dark dropdown-toggle w-100"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              type="button"
+            ><img
+                class="rounded-circle img-nav-user"
+                width="32"
+                height="32"
+                src="/media/{{user.avatar.uid}}"
+              />{{user.fio}}</button>
+            <div class="dropdown-menu w-100 text-center"><a
+                class="dropdown-item active"
+              >Профиль</a><a
+                class="dropdown-item dropdown-item-logout"
+                href="/logout"
+              >Выход</a>
+            </div>
+          </div>
+          {{! <div class="input-group"><input class="form-control" type="text"
+                            placeholder="Поиск..."><button class="btn btn-primary" type="button"><i
+                                class="fas fa-search"></i></button></div> }}
+        </div>
+        <div
+          class="card chat-list-card"
+          onclick="window.location.replace(&quot;/chats&quot;);"
+        >
+          <div class="card-body row">
+            <div class="col-12 text-center">
+              <h5>Вернуться в чат</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion mob mt-2" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Меню
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+          style=""
+        >
+          <div class="accordion-body">
+            <div>
+              <div class="text-center chat-list-search">
+                <div class="dropdown mb-2"><button
+                    class="btn btn-outline-dark dropdown-toggle w-100"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                    type="button"
+                  ><img
+                      class="rounded-circle img-nav-user"
+                      width="32"
+                      height="32"
+                      src="/media/{{user.avatar.uid}}"
+                    />{{user.fio}}</button>
+                  <div class="dropdown-menu w-100 text-center"><a
+                      class="dropdown-item active"
+                    >Профиль</a><a
+                      class="dropdown-item dropdown-item-logout"
+                      href="/logout"
+                    >Выход</a>
+                  </div>
+                </div>
+                {{! <div class="input-group"><input class="form-control" type="text"
+                            placeholder="Поиск..."><button class="btn btn-primary" type="button"><i
+                                class="fas fa-search"></i></button></div> }}
+              </div>
+              <div
+                class="card chat-list-card"
+                onclick="window.location.replace(&quot;/chats&quot;);"
+              >
+                <div class="card-body row">
+                  <div class="col-12 text-center">
+                    <h5>Вернуться в чат</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col pt-3">
+      <h3 class="text-center mb-3">Профиль {{user.fio}}</h3>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Загрузка аватара</h4>
+          <h6 class="text-muted card-subtitle mb-2">Здесь вы можете обновить
+            аватар вашего профиля.</h6>
+          <form method="post" enctype="multipart/form-data">
+            <div class="input-group">
+              <input type="hidden" name="action" value="change-avatar" />
+              <input
+                class="form-control"
+                type="file"
+                accept="image/*"
+                name="avatar"
+                required
+              />
+              <button class="btn btn-primary" type="submit">Загрузить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Информация о пользователе</h4>
+          <h6 class="text-muted card-subtitle mb-2">Главная информация профиля.</h6>
+          <form>
+            <div class="input-group mb-2"><span
+                class="input-group-text"
+              >ФИО</span><input
+                class="form-control"
+                type="text"
+                readonly=""
+                value="{{user.fio}}"
+              /></div>
+            <div class="input-group mb-2"><span
+                class="input-group-text"
+              >Логин</span><input
+                class="form-control"
+                type="text"
+                readonly=""
+                value="{{user.login}}"
+              /></div>
+            <div class="input-group mb-2"><span
+                class="input-group-text"
+              >Отдел</span><input
+                class="form-control"
+                type="text"
+                readonly=""
+                value="{{user.otdel.name}}"
+              /></div>
+            <div class="input-group mb-2"><span
+                class="input-group-text"
+              >Должность</span><input
+                class="form-control"
+                type="text"
+                readonly=""
+                value="{{user.dolzshnost}}"
+              /></div>
+            <div class="input-group md-2"><span class="input-group-text">Уровень
+                доступа</span><input
+                class="form-control"
+                type="text"
+                readonly=""
+                value="{{ulevel}}"
+              /></div>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Изменить пароль</h4>
+          <h6 class="text-muted card-subtitle mb-2">Изменение пароля вашего
+            пользователя.</h6>
+          <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="action" value="change-pass" />
+            <p style="color: red;">{{changePassError}}</p>
+            <div class="input-group mb-2"><span class="input-group-text">Старый
+                пароль</span><input
+                class="form-control"
+                type="password"
+                name="old"
+                required=""
+              /></div>
+            <div class="input-group mb-2"><span class="input-group-text">Новый
+                пароль</span><input
+                class="form-control"
+                type="password"
+                name="new1"
+                minlength="8"
+                required=""
+              /></div>
+            <div class="input-group mb-2"><span class="input-group-text">Повтор
+                нового пароля</span><input
+                class="form-control"
+                type="password"
+                name="new2"
+                minlength="8"
+                required=""
+              /></div><button
+              class="btn btn-primary w-100"
+              type="submit"
+            >Сохранить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

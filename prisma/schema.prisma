@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Otdel {
+  id    Int    @id @unique @default(autoincrement())
+  name  String @unique
+  users User[] @relation("user-otdel")
+  Chat  Chat[] @relation("chat-otdel")
+}
+
+model User {
+  id          Int       @id @unique @default(autoincrement())
+  fio         String    @unique
+  avatar      Media?    @relation(fields: [mediaUid], references: [uid])
+  login       String    @unique
+  password    String
+  level       String    @default("l2")
+  otdel       Otdel     @relation("user-otdel", fields: [otdelId], references: [id])
+  otdelId     Int
+  Message     Message[] @relation("user-chat-messages")
+  mediaUid    String?
+  Chat        Chat[]
+  users1Chats Chat[]    @relation("p2p-chat-user1")
+  users2Chats Chat[]    @relation("p2p-chat-user2")
+  dolzshnost String @default("")
+}
+
+model Chat {
+  id     Int    @id @unique @default(autoincrement())
+  name   String
+  desc   String
+  avatar Media  @relation(fields: [mediaUid], references: [uid])
+
+  type String @default("otdel-chat") // otdel-chat/p2p
+
+  otdel   Otdel? @relation("chat-otdel", fields: [otdelId], references: [id])
+  otdelId Int?
+
+  user1 User? @relation("p2p-chat-user1", fields: [userId1], references: [id])
+  user2 User? @relation("p2p-chat-user2", fields: [userId2], references: [id])
+
+  Message  Message[] @relation("message-chat")
+  mediaUid String
+  userId1  Int?
+  userId2  Int?
+  User     User?     @relation(fields: [userId], references: [id])
+  userId   Int?
+}
+
+model Message {
+  id        Int      @id @unique @default(autoincrement())
+  text      String
+  media     Media[]
+  user      User     @relation("user-chat-messages", fields: [userId], references: [id])
+  chat      Chat     @relation("message-chat", fields: [chatId], references: [id])
+  userId    Int
+  chatId    Int
+  createdAt DateTime @default(now())
+}
+
+model Media {
+  uid     String    @id @unique
+  User    User[]
+  Chat    Chat[]
+  Message Message[]
+  Posters Posters[] @relation("poster-media")
+}
+
+model Posters {
+  id       Int    @id @unique @default(autoincrement())
+  image    Media  @relation("poster-media", fields: [mediaUid], references: [uid])
+  title    String @unique
+  desc     String
+  mediaUid String
+}
+
+model News {
+  id             Int    @id @unique @default(autoincrement())
+  faImageClasses String
+  title          String
+  desc           String
+}

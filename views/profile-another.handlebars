@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div style="height: 100vh;overflow-y: scroll;">
+                <div class="text-center chat-list-search">
+                    <div class="dropdown mb-2"><button class="btn btn-outline-dark dropdown-toggle w-100"
+                            aria-expanded="false" data-bs-toggle="dropdown" type="button"><img
+                                class="rounded-circle img-nav-user" width="32" height="32"
+                                src="/media/{{user.avatar.uid}}">{{user.fio}}</button>
+                        <div class="dropdown-menu w-100 text-center"><a class="dropdown-item active">Профиль</a><a
+                                class="dropdown-item dropdown-item-logout" href="/logout">Выход</a>
+                        </div>
+                    </div>
+                    {{!-- <div class="input-group"><input class="form-control" type="text"
+                            placeholder="Поиск..."><button class="btn btn-primary" type="button"><i
+                                class="fas fa-search"></i></button></div> --}}
+                </div>
+                <div class="card chat-list-card" onclick="window.location.replace(&quot;/chats&quot;);">
+                    <div class="card-body row">
+                        <div class="col-12 text-center">
+                            <h5>Вернуться в чат</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8 pt-3">
+            <h3 class="text-center mb-3">Профиль {{auser.fio}}</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">Информация о пользователе</h4>
+                    <h6 class="text-muted card-subtitle mb-2">Главная информация профиля.</h6>
+                    <form>
+                        <div class="input-group mb-2"><span class="input-group-text">ФИО</span><input
+                                class="form-control" type="text" readonly="" value="{{auser.fio}}"></div>
+                        <div class="input-group mb-2"><span class="input-group-text">Логин</span><input
+                                class="form-control" type="text" readonly="" value="{{auser.login}}"></div>
+                        <div class="input-group mb-2"><span class="input-group-text">Отдел</span><input
+                                class="form-control" type="text" readonly="" value="{{auser.otdel.name}}"></div>
+                        <div class="input-group mb-2"><span class="input-group-text">Должность</span><input
+                                class="form-control" type="text" readonly="" value="{{auser.dolzshnost}}"></div>
+                        <div class="input-group md-2"><span class="input-group-text">Уровень доступа</span><input
+                                class="form-control" type="text" readonly="" value="{{ulevel}}"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

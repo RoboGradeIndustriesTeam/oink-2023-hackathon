@@ -1,0 +1,28 @@
+
+
+{{!-- Регистрации нет!!! --}}
+{{!-- Регистрации нет!!! --}}
+{{!-- Регистрации нет!!! --}}
+{{!-- Регистрации нет!!! --}}
+{{!-- Регистрации нет!!! --}}
+{{!-- Регистрации нет!!! --}}
+
+
+<h1>Register</h1>
+<form method="post">
+    <p style="color: red">
+        {{#each errors}}
+            <p style="color: red; text-align: center">{{this}}</p>
+        {{/each}}
+    </p>
+    <p style="color: green">
+        {{#each sucesses}}
+            <p style="color: green; text-align: center">{{this}}</p>
+        {{/each}}
+    </p>
+    <input type="text" name="fio" placeholder="ФИО">
+    <input type="email" name="login" placeholder="Ваша почта">
+    <input type="password" name="password" placeholder="Введите пароль">
+    <input type="password" name="password2" placeholder="Введите пароль ещё раз">
+    <input type="submit" value="register">
+</form>

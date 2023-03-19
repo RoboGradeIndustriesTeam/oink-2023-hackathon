@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 comp">
+      <div style="height: 100vh; overflow-y: scroll">
+        <div class="text-center chat-list-search">
+          <div class="dropdown mb-2">
+            <button
+              class="btn btn-outline-dark dropdown-toggle w-100"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              type="button"
+            >
+              <img
+                class="rounded-circle img-nav-user"
+                width="32"
+                height="32"
+                src="/media/{{user.avatar.uid}}"
+              />{{user.fio}}
+            </button>
+            <div class="dropdown-menu w-100 text-center">
+              <a href="/profile" class="dropdown-item">Профиль</a>
+              <a class="dropdown-item dropdown-item-logout"
+                href="/logout"
+              >Выход</a>
+            </div>
+          </div>
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Поиск..."
+            /><button class="btn btn-primary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div id="chatMount" style="overflow-x: hidden"></div>
+      </div>
+    </div>
+
+    <div class="accordion mob mt-2" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Меню
+          </button>
+        </h2>
+        <div
+          id="collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+          style=""
+        >
+          <div class="accordion-body">
+            <div>
+              <div class="text-center chat-list-search">
+                <div class="dropdown mb-2">
+                  <button
+                    class="btn btn-outline-dark dropdown-toggle w-100"
+                    aria-expanded="false"
+                    data-bs-toggle="dropdown"
+                    type="button"
+                  >
+                    <img
+                      class="rounded-circle img-nav-user"
+                      width="32"
+                      height="32"
+                      src="/media/{{user.avatar.uid}}"
+                    />{{user.fio}}
+                  </button>
+                  <div class="dropdown-menu w-100 text-center">
+                    <a class="dropdown-item active">Профиль</a><a
+                      class="dropdown-item dropdown-item-logout"
+                      href="#"
+                    >Выход</a>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Поиск..."
+                  /><button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <div id="chatMount2" style="overflow-x: hidden"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div
+        class="text-start d-flex justify-content-center align-items-center chat-header"
+      >
+        <a class="d-flex align-items-center" href="#"><img
+            class="rounded-circle chat-header-img"
+            id="thisChatMountImg"
+          />
+          <h4 id="thisChatMountName"></h4>
+        </a>
+      </div>
+      <div class="msg msg-list" id="msgMount">
+        <div></div>
+
+      </div>
+
+      <div class="input-group chat-msg-input col">
+        <ul
+          class="list-group file-list-above-file-input-chat"
+          id="mountfilelist"
+        >
+        </ul>
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          onclick='document.getElementById("upload-file").click();'
+          id="newMessageMediaBtn"
+        >
+
+          <i class="fas fa-paperclip"></i></button><input
+          class="form-control d-none"
+          type="file"
+          multiple
+          id="upload-file"
+          accept=".docs,.xls,.pdf,.png,.jpg,.doc"
+        /><input
+          class="form-control"
+          id="textMsg"
+          type="text"
+          placeholder="Введите сообщение.."
+        /><button class="btn btn-primary" id="sendBtn" type="button">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+
+      </div>
+
+      <div class="modal fade" role="dialog" tabindex="-1" id="accept-send-link">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Внимание!</h4>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Прикрепляя ссылку на сторонний ресурс вы полностью несете
+                ответственность за любые возможные негативные последствия.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-light"
+                type="button"
+                data-bs-dismiss="modal"
+              >
+                Отмена</button><button
+                class="btn btn-primary"
+                type="button"
+              >Соглашаюсь</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/chat.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  window.baseMessages = "{{chatsJSON}}"; window.baseChats = "{{chatsSJSON}}";
+  window.currentChatId =
+  {{chat.id}}
+</script>
+<script
+  src="https://momentjs.com/downloads/moment-with-locales.min.js"
+></script>
+<script src="/static/js/chat.js"></script>
+
+<script src="/assets/js/index.js"></script>
